@@ -52,10 +52,10 @@ class reportController extends CI_Controller {
             $config['file_name']=$_FILES['file']['name'];
             $this->load->library('upload',$config);
             
-            if($this->upload->do_upload('files'))
+            if($this->upload->do_upload('file'))
             {
               $uploadData = $this->upload->data();
-              $filename=$uploadData['filename'];
+              $filename=$uploadData['file_name'];
               $file=fopen("assets/files/".$filename,"r");
               $i=0;
               $importData_arr=array();
@@ -63,8 +63,11 @@ class reportController extends CI_Controller {
               while(($filedata=fgetcsv($file, 1000,",")!==FALSE))
               {
                 $num = count($filedata);
+      
                 for($c=0;$c<$num;$c++){
+    
                   $importData_arr[$i][]=$filedata[$c];
+            
                 }
 
                 $i++;
@@ -72,11 +75,13 @@ class reportController extends CI_Controller {
               }
               fclose($file);
               $skip = 0;
-
-              foreach($importData_arr as $userdata){
+              echo json_encode($importData_arr);
+              foreach($importData_arr as $reportdata){
                 if($skip!=0)
                 {
-                  $this->DataModel->insertRecord($userdata);
+
+                  $re=$this->ReportModel->insertRecord($reportdata);
+                  echo json_encode($re);
                 }
                 $skip++;
           

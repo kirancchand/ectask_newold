@@ -8,6 +8,35 @@
          parent::__construct(); 
       } 
 
+      public function insertRecord($record)
+      {
+
+return $record;
+        // $this->db->select('*');
+        // $this->db->where('slno',$record[0]);
+        // $this->db->from('monthly_repor');
+        // $q=$this->db->get();
+        // $response=$q->result_array();
+
+        // if(count($response)==0)
+        // {
+        //   $new_report = array(
+        //     'slno'=> trim($record[1]),
+        //     'catagory' => trim($record[2]),
+        //     'place'=> trim($record[3]),
+        //     'date'=> trim($record[4]),
+        //     'particulars' => trim($record[5]),
+        //     'remarks' => trim($record[6]),
+        //   );
+
+        // $this->db->insert('monthly_report',$new_report);
+   
+        // }
+
+      }
+
+
+
       public function get_sidemenu()
       {
         $role=$this->session->userdata('role');
